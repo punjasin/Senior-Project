@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+
+<title>Index</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+
+</head>
+<body>
+	<div class="container">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="/#"> Thymeleaf - Index </a>
+				<ul class="nav">
+					<li><a href="views/list.html" th:href="@{/bidding}">Bidding
+							List</a></li>
+				</ul>
+			</div>
+		</div>
+		<h1 layout:fragment="header">Layout</h1>
+		<div layout:fragment="content">
+			<p th:text="${txt}"></p>
+		</div>
+	</div>
+
+</body>
+</html>

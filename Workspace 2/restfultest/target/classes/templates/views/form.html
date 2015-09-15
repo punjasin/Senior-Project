@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="index">
+<head>
+<title>Bidding : Place</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Enter : Token</h1>
+	<div layout:fragment="content" class="container">
+    <form action="#" th:action="@{/form}" th:object="${bidding}" method="post">
+    	<p>Token: <input type="text" th:field="*{token}" /></p>        
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="index">
+<head>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+	href="../../css/bootstrap.min.css" />
+
+<title>Bidding : View all</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Bidding : View all</h1>
+	<div layout:fragment="content" class="container">
+		<div class="pull-right">
+			<a href="form.html" th:href="@{/form}">Place bid</a>
+		</div>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Bid ID</th>
+					<th>Token</th>
+					<th>Session ID</th>
+					<th>Browser</th>
+					<th>Version</th>
+					<th>OS</th>
+					<th>IP Address</th>
+				</tr>
+			</thead>
+			<tbody>			
+				<tr th:if="${list.empty}">
+					<td colspan="7">No Bidding</td>
+				</tr>
+				<tr th:each="list : ${list}">
+					<td th:text="${list.id}"></td>
+					<td th:text="${list.token}"></td>
+					<td th:text="${list.session_id}"></td>
+					<td th:text="${list.browser}"></td>
+					<td th:text="${list.version}"></td>
+					<td th:text="${list.os}"></td>
+					<td th:text="${list.ip_address}"></td>					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

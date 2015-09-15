@@ -1,0 +1,11 @@
+com\test\Application.class
+com\test\repository\StudentRepository.class
+com\test\model\Bidding.class
+com\test\repository\BiddingRepository.class
+com\test\service\BiddingService.class
+com\test\service\BiddingServiceBean.class
+com\test\service\StudentService.class
+com\test\service\StudentServiceBean.class
+com\test\model\Student.class
+com\test\mvc\BiddingController.class
+com\test\restcontroller\StudentController.class
