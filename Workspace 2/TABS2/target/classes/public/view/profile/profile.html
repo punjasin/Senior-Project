@@ -1,0 +1,95 @@
+<h1>Profile</h1>
+
+<hr>
+<div class="alert alert-danger" ng-show="error">{{ error_msg }}</div>
+
+<div class="col-sm-2 side-menu">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="" onclick="window.location.replace('/profile')">Profile</a></li>
+		<li><a href="" ng-click="editProfile()">Edit Profile</a></li>
+		<li><a href="/changePassword">Change Password</a></li>
+	</ul>
+</div>
+
+<div class="container col-md-10">
+	<form role="form" ng-submit="update()"
+		class="form-horizontal profile-form">
+
+		<div class="form-group">
+			<label for="inputEmail" class="col-sm-2 control-label ">Email:</label>
+			<div class="col-sm-3">
+				<input type="email" class="form-control" id="inputEmail"
+					placeholder="Email Address" required
+					ng-model="user.emailInput" disabled>
+			</div>
+		</div>
+
+
+
+		<div class="form-group">
+			<label for="inputStudentID" class="col-sm-2 control-label">Student
+				ID:</label>
+			<div class="col-sm-2">
+				<input ng-model="user.studentIDInput" type="number"
+					class="form-control" id="inputStudentID"
+					placeholder="Student ID" required min="510000000" max="589999999"
+					ng-value="user.student_id" disabled >
+			</div>
+
+		</div>
+
+		<div class="form-group">
+			<label for="inputFirstname" class="col-sm-2 control-label">First
+				Name:</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputFirstname"
+					placeholder="First Name" required
+					ng-model="user.firstNameInput" disabled>
+			</div>
+
+			<label for="inputLastname" class="col-sm-2 control-label">Last
+				Name:</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputLastname"
+					placeholder="Last Name" required
+					ng-model="user.lastNameInput" disabled>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="inputFirstname" class="col-sm-2 control-label">Major:</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputMajor"
+					placeholder="Major" required
+					ng-model="user.majorInput" disabled>
+			</div>
+
+			<label for="inputLastname" class="col-sm-2 control-label">Faculty:</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputFaculty"
+					placeholder="Faculty" required
+					ng-model="user.facultyInput" disabled>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="token" class="col-sm-2 control-label">Token:</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="inputFaculty"
+					placeholder="token" required disabled ng-value="user.token">
+			</div>
+
+		</div>
+
+		<hr>
+		<div class="form-group">
+			<div class="col-sm-4" ng-show="edit")>
+				<button type="submit" class="btn btn-primary btn-block">Submit</button>
+			</div>
+			<div class="col-sm-4" ng-show="edit")>
+				<button type="button" class="btn btn-primary btn-block"
+					onclick="window.location.replace('/profile')">Cancel</button>
+			</div>
+		</div>
+
+	</form>
+</div>

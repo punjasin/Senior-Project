@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+<base href="/" />
+<title>TABS - The Activity Bidding System</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-cookies.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/navdd.css">
+<link rel="stylesheet" href="css/tabs.css">
+
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="view/auth/auth.js"></script>
+<script type="text/javascript" src="view/home/home.js"></script>
+<script type="text/javascript" src="view/profile/profile.js"></script>
+<script type="text/javascript" src="view/activity/activity.js"></script>
+<script type="text/javascript" src="view/register/register.js"></script>
+<script type="text/javascript" src="view/navigation/navigation.js"></script>
+</head>
+
+
+<body ng-app="index">
+
+	<div ng-include="'view/navigation/navdd.html'"></div>
+
+	<div ng-view class="container"></div>
+
+
+</body>
+
+</html>
