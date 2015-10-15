@@ -5,6 +5,10 @@ insert into Stadium (name,price,lat,lon,photo) values ('Old Trafford',99.00,11.1
 insert into User (email,password,firstName,lastName,student_id,token,role) values ('aaa@gmail.com','123456','111','222',100000001,5000,'ADMIN');
 insert into User (email,password,firstName,lastName,student_id,major,faculty,token,role) values ('test@test.com','123456','ABC','DEF',542115002,'SE','CAMT',50,'ADMIN');
 
-insert into Activity (activity_name,description,place,start_time,end_time,seat_quota) values ('E3','Electronic Entertainment Expo','LA','2015-06-16 08:00:00','2015-06-18 20:00:00',100);
-insert into Activity (activity_name,description,place,start_time,end_time,seat_quota) values ('Google I/O','Google Event','San Francisco','2015-05-15 08:00:00','2015-05-15 20:00:00',50);
-insert into Activity (activity_name,description,place,start_time,end_time,seat_quota) values ('Microsoft Ignite','Microsoft Event','Chicago','2015-05-04 08:00:00','2015-05-04 20:00:00',40);
+insert into Activity (activity_name,description,place,start_time,end_time,seat_quota,isSelected) values ('E3','Electronic Entertainment Expo','LA','2015-06-16 08:00:00','2015-06-18 20:00:00',100,FALSE);
+insert into Activity (activity_name,description,place,start_time,end_time,seat_quota,isSelected) values ('Google I/O','Google Event','San Francisco','2015-05-15 08:00:00','2015-05-15 20:00:00',50,FALSE);
+insert into Activity (activity_name,description,place,start_time,end_time,seat_quota,isSelected) values ('Microsoft Ignite','Microsoft Event','Chicago','2015-05-04 08:00:00','2015-05-04 20:00:00',2,TRUE);
+
+insert into Bidding (activity_id,title,description,bStart_time,bEnd_time,seat_quota,status) values (3,'Bidding For Microsoft Ignite','Testttttttt','2015-05-04 08:00:00','2015-05-04 20:00:00',2,'Close');
+
+insert into BidData (bidding_id,student_id,firstName,lastName,token,placeBidTime,status) values (1,542115002,'ABC','DEF',20,'2015-05-04 09:00:00','Bidding..');

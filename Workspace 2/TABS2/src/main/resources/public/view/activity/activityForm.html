@@ -1,10 +1,10 @@
-<h1>Create new activity</h1>
+<h1>Activity Form</h1>
 
 <hr>
 <div class="alert alert-danger" ng-show="error">{{ error_msg }}</div>
 
-<div class="container" style="float: left;">
-	<form role="form" ng-submit="createActivity()" class="form-horizontal">
+<div class="container" style="float: left;" ng-init="getDetail()">
+	<form role="form" ng-submit="formActivity()" class="form-horizontal">
 
 		<div class="form-group">
 			<label for="inputName" class="col-sm-3 control-label ">Activity
@@ -56,17 +56,17 @@
 				Quota: </label>
 			<div class="col-sm-2">
 				<input type="number" class="form-control" id="inputSeat" required
-					ng-model="activity.seatQuotaInput" min="1">
+					ng-model="activity.seatQuotaInput" min="1" placeholder="Seat Quota">
 			</div>
 		</div>
 
 		<hr>
 		<div class="form-group">
 			<div class="col-sm-4">
-				<button type="submit" class="btn btn-primary btn-block">Create</button>
+				<button type="submit" class="btn btn-primary btn-block">Submit</button>
 			</div>
 			<div class="col-sm-4">
-				<button type="reset" class="btn btn-primary btn-block">Reset</button>
+				<button type="reset" class="btn btn-primary btn-block" ng-hide="isUpdate()">Reset</button>
 			</div>
 		</div>
 

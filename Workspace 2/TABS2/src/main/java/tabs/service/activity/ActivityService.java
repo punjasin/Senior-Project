@@ -10,4 +10,6 @@ public interface ActivityService {
 	public Activity getActivity(Long id);
 	public Collection<Activity> getActivityList();
 	public void delete(Long id);
+	public void setStatus(Long id, boolean status);
+	public Collection<Activity> getAvailableActivity();
 }

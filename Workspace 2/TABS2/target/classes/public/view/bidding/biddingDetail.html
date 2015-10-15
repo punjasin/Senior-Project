@@ -1,0 +1,25 @@
+<h1>Bidding : </h1>
+
+<div class="container col-md-10" ng-init="getBidData()">
+	<table class="table table-striped" id="bidDataTable">
+		<thead>
+			<tr>
+				<th class="col-sm-1">No.</th>
+				<th class="col-sm-3">Student ID</th>
+				<th class="col-sm-3">Name</th>
+				<th class="col-sm-3">Token</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="bidData in bidDataList | orderBy : 'token'" height="55">
+				<td hidden="true" id="activityID">{{ activity.id }}</td>
+				<td>{{ $index + 1 }}</td>
+				<td>{{ bidData.student_id }}</td>
+				<td>{{ bidData.firstName+' '+bidData.lastName }}</td>
+				<td>{{ bidData.token }}</td>				
+			</tr>
+		</tbody>
+	</table>
+			
+</div>
+<div class="container"><a style="float: right;" class="btn btn-primary " ng-show="isAdmin()" href="/createActivity">Create New Activity</a></div>

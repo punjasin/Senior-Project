@@ -4,6 +4,7 @@ import java.util.Collection;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import tabs.entity.Activity;
 import tabs.repository.ActivityRepository;
 
@@ -14,7 +15,7 @@ public class ActivityServiceBean implements ActivityService {
 	@Autowired
 	private ActivityRepository activityRepo;
 	private int ERROR_CODE;
-		
+
 	public int getERROR_CODE() {
 		return ERROR_CODE;
 	}
@@ -40,21 +41,21 @@ public class ActivityServiceBean implements ActivityService {
 		if (activity != null) {
 			Collection<Activity> activityList = activityRepo.findAll();
 			for (Activity persistedActivity : activityList) {
-				if (persistedActivity.getActivity_name().equals(activity
-						.getActivity_name())
-						&& persistedActivity.getStart_time().equals(activity
-								.getStart_time())
-						&& persistedActivity.getEnd_time().equals(activity
-								.getEnd_time())) {
+				if (persistedActivity.getActivity_name().equals(
+						activity.getActivity_name())
+						&& persistedActivity.getStart_time().equals(
+								activity.getStart_time())
+						&& persistedActivity.getEnd_time().equals(
+								activity.getEnd_time())) {
 					setERROR_CODE(2);
 					return null;
 				}
 			}
-		}				
+		}
 		Activity savedActivity = activityRepo.save(activity);
 		setERROR_CODE(0);
 		return savedActivity;
-		
+
 	}
 
 	@Override
@@ -67,16 +68,24 @@ public class ActivityServiceBean implements ActivityService {
 				|| activity.getPlace() == null
 				|| activity.getStart_time() == null
 				|| activity.getEnd_time() == null
-				|| (Integer) activity.getSeat_quota() == null) {
+				|| activity.getSeat_quota() == 0) {
+			setERROR_CODE(2);
 			return null;
 		}
 		Activity activityPersisted = activityRepo.findOne(activity.getId());
 		if (activityPersisted == null) {
+			setERROR_CODE(1);
 			return null;
-		} else {
-			Activity savedActivity = activityRepo.save(activity);
-			return savedActivity;
 		}
+		setERROR_CODE(0);
+		
+		activityRepo.editActivity(activity.getActivity_name(), activity
+				.getDescription(), activity.getPlace(),
+				activity.getUpdateStartTime(),
+				activity.getUpdateEndTime(), activity
+						.getSeat_quota(), activity.getId());
+
+		return null;
 	}
 
 	@Override
@@ -100,5 +109,16 @@ public class ActivityServiceBean implements ActivityService {
 	public void delete(Long id) {
 		Activity deleteActivity = activityRepo.getOne(id);
 		activityRepo.delete(deleteActivity);
+	}
+
+	@Override
+	public void setStatus(Long id, boolean status) {
+		activityRepo.setStatus(status, id);		
+	}
+
+	@Override
+	public Collection<Activity> getAvailableActivity() {
+		// TODO Auto-generated method stub
+		return activityRepo.getAvailableActivity();
 	}
 }

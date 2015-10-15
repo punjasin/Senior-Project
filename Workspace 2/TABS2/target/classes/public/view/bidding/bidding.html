@@ -1,0 +1,27 @@
+<h1>Bidding List</h1>
+<div class="container col-md-10" ng-init="getBiddingList()">
+	<table class="table table-striped" id="biddingTable">
+		<thead>
+			<tr>
+				<th class="col-sm-1">No.</th>
+				<th class="col-sm-3">Title</th>
+				<th class="col-sm-3">Description</th>
+				<th class="col-sm-2">Seat Quota</th>
+				<th class="col-sm-1">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="bidding in biddingList | orderBy : 'id'" height="55">
+				<td hidden="true" id="biddingID">{{ bidding.id }}</td>
+				<td>{{ $index + 1 }}</td>
+				<td>{{ bidding.title }}</td>
+				<td>{{ bidding.description }}</td>
+				<td>{{ bidding.seat_qouta }}</td>
+				<td>{{ bidding.status }}</td>
+				<td><a class="btn btn-primary btn-block" onclick="selectBiddingId(this)" >View detail</a></td>
+			</tr>
+		</tbody>
+	</table>
+			
+</div>
+<div class="container"><a style="float: right;" class="btn btn-primary "  href="/createBidding" ng-show="isAdmin()">Create New Activity</a></div>

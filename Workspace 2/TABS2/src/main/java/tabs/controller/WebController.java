@@ -25,6 +25,7 @@ public class WebController {
 		return user;
 	}
 	
+	
 	@RequestMapping("/resource")
 	@ResponseBody
 	public Map<String, Object> home() {

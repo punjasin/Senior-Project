@@ -17,6 +17,7 @@ public class Activity {
 	private String activity_name, description, place;
 	private Timestamp start_time, end_time;
 	private int seat_quota;
+	private boolean isSelected = false;
 	
 	public Activity(){
 		
@@ -80,4 +81,19 @@ public class Activity {
 		this.start_time = Timestamp.valueOf(start_time);
 	}
 	
+	public Timestamp getUpdateStartTime(){
+		return start_time;
+	}
+	
+	public Timestamp getUpdateEndTime(){
+		return end_time;
+	}
+
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
+	}
 }

@@ -1,17 +1,31 @@
 <div ng-init="getDetail()" class="container">
 
-<h1>Activity: {{activity.activity_name}}</h1>
+	<h1>Activity: {{activity.activity_name}}</h1>
 
-<p><b>Description: </b>{{activity.description}}</p>
+	<p>
+		<b>Description: </b>{{activity.description}}
+	</p>
 
-<p><b>Place: </b>{{activity.place}}</p>
+	<p>
+		<b>Place: </b>{{activity.place}}
+	</p>
 
-<p><b>Start date: </b>{{activity.start_time}}</p>
+	<p>
+		<b>Start date: </b><input class="form-control" type="datetime-local"
+			ng-model="activity.startTimeInput" disabled style="max-width: 250px;"> 
+	</p>
 
-<p><b>End date: </b>{{activity.end_time}}</p>
+	<p>
+		<b>End date: </b><input class="form-control" type="datetime-local"
+			ng-model="activity.endTimeInput" disabled style="max-width: 250px;">
+	</p>
 
-<p><b>Seat: </b>{{activity.seat_quota}}</p>
+	<p>
+		<b>Seat: </b>{{activity.seat_quota}}
+	</p>
 
-<a class="btn btn-primary " ng-show="isAdmin()">Edit Activity</a>
-<a class="btn btn-primary " ng-show="isAdmin()" ng-click="deleteActivity()">Delete Activity</a>
+	<a class="btn btn-primary " ng-show="isAdmin()"
+		ng-click="updateActivity()">Edit Activity</a> <a
+		class="btn btn-primary " ng-show="isAdmin()"
+		ng-click="deleteActivity()">Delete Activity</a>
 </div>

@@ -19,6 +19,7 @@ public class UserServiceBean implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
+		
 	private int ERROR_CODE;
 
 	public int getERROR_CODE() {

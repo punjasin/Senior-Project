@@ -27,12 +27,12 @@ import org.springframework.web.util.WebUtils;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-    private UserDetailsService userDetailsService;
+    UserDetailsService userDetailsService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().and().authorizeRequests()
-				.antMatchers("/", "/index.html", "/login", "/message", "/home", "/view/**" ,"/logout", "/register", "/getActivity", "/activity", "/activities", "/registerAcc", "/getProfile", "/activity/*", "/activityDetail").permitAll()
+				.antMatchers("/", "/index.html", "/login", "/message", "/home", "/view/**" ,"/logout", "/register", "/getActivity", "/activity", "/activities", "/registerAcc", "/getProfile", "/activity/*", "/activityDetail", "/getBiddingList", "/bidding", "/getBidData").permitAll()
 				.antMatchers("/getUser/**", "/getAllUsers", "/deleteAct", "/createActivity", "/createActivityRest").hasAuthority("ADMIN")
 				.anyRequest()
 				.authenticated().and().csrf()

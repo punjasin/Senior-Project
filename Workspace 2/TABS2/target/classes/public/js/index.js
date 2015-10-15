@@ -1,5 +1,5 @@
 angular
-		.module('index', [ 'ngRoute', 'auth', 'home', 'activity', 'navigation', 'register', 'profile' ])
+		.module('index', [ 'ngRoute', 'auth', 'home', 'activity', 'navigation', 'register', 'profile', 'bidding' ])
 		.config(
 				
 				function($routeProvider, $httpProvider, $locationProvider) {					
@@ -13,12 +13,21 @@ angular
 					}).when('/createActivity', {
 						templateUrl : 'view/activity/activityForm.html',
 						controller : 'activity'
+					}).when('/activity/update/:activityID', {
+						templateUrl : 'view/activity/activityForm.html',
+						controller : 'activity'
 					}).when('/activity/:activityID', {						
 						templateUrl : 'view/activity/activityDetail.html',
 						controller : 'activity'
 					}).when('/register', {
 						templateUrl : 'view/register/register.html',
 						controller : 'register'
+					}).when('/bidding', {
+						templateUrl : 'view/bidding/bidding.html',
+						controller : 'bidding'
+					}).when('/bidding/:biddingID', {
+						templateUrl : 'view/bidding/biddingDetail.html',
+						controller : 'bidding'
 					}).when('/profile', {
 						templateUrl : 'view/profile/profile.html',
 						controller : 'profile'

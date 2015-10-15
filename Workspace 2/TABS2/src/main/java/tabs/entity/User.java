@@ -5,7 +5,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.transaction.Transactional;
 
+@Transactional
 @Entity
 public class User {
 
