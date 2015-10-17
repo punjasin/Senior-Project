@@ -34,6 +34,9 @@ angular
 					}).when('/bidding/update/:biddingID', {
 						templateUrl : 'view/bidding/biddingForm.html',
 						controller : 'bidding'
+					}).when('/userBidDataList', {
+						templateUrl : 'view/bidding/userBidDataList.html',
+						controller : 'bidding'
 					}).when('/profile', {
 						templateUrl : 'view/profile/profile.html',
 						controller : 'profile'

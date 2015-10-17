@@ -59,5 +59,18 @@ public class BidDataServiceBean implements BidDataService {
 		}
 		return persistedBidData;
 	}
+	
+	public Collection<BidData> getBidDataListByStudentId(int student_id){
+		Collection<BidData> userBidDataList = bidDataRepo.getUserBidDataList(student_id);				
+		return userBidDataList;
+	}
+
+	@Override
+	public void cancelBid(Long biddingId, int student_id) {
+		User u = userRepo.getUserByStudentID(student_id);
+		BidData persistedBidData = bidDataRepo.getUserBidData(biddingId, student_id);		
+		userRepo.updateToken(u.getStudent_id(), u.getToken()+persistedBidData.getToken());
+		bidDataRepo.deleteBidData(student_id, biddingId);						
+	}
 
 }

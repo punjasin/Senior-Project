@@ -4,9 +4,7 @@ angular.module('navigation', ['ngRoute', 'auth']).controller(
 		function($scope, $route, auth, $http) {
 
 			$scope.credentials = {};
-			
-			
-
+						
 			$scope.tab = function(route) {
 				return $route.current && route === $route.current.controller;
 			};
@@ -33,6 +31,6 @@ angular.module('navigation', ['ngRoute', 'auth']).controller(
 			$http.get('/getProfile?email=' + window.$userdata.email).success(
 					function(data) {
 						$scope.user = data;
-						window.$userdata = data;
+						window.$userdata = data;						
 					});
 		});

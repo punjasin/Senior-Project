@@ -43,4 +43,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	@Query("select u from User u where u.student_id = :student_id")
 	User getUserByStudentID(@Param("student_id")int student_id);
+	
+	
 }

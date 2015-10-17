@@ -1,6 +1,6 @@
-angular.module('bidding', ['ngRoute', 'auth', 'navigation']).controller(
+angular.module('bidding', ['ngRoute', 'navigation']).controller(
 		'bidding', 
-		function($scope, $http, $routeParams, $route) {
+		function($scope, $http, $routeParams) {
 			
 			$scope.getBiddingList = function() {
 				$http.get('/getBiddingList').success(function(data) {
@@ -234,8 +234,28 @@ angular.module('bidding', ['ngRoute', 'auth', 'navigation']).controller(
 				$scope.updateUserBid = true;
 			}
 			
+			$scope.getUserBidDataList = function() {				
+				$http.get('/getUserBidDataList/'+window.$userdata.student_id).success(function(data) {
+					$scope.userBidDataList = data;															
+					$scope.getBiddingList();					
+				}).error(function(data) {																		
+					console.log("error")
+				});				
+			}
+			
+			$scope.cancelBid = function() {
+				$scope.confirmCancelBid = confirm("Do you want to cancel this Bid?")
+				if($scope.confirmCancelBid==true){
+					$http.delete('/cancelBidData/'+$routeParams.biddingID+"/"+window.$userdata.student_id).success(function(data) {
+						window.location.replace('/bidding');
+					}).error(function(data) {
+						console.log("error")
+				});
+				}
+				}
 			
 			
+						
 			$scope.getBidData = function() {
 				$scope.getBiddingDetail();				
 				$http.get('/getBidData?bId='+$routeParams.biddingID).success(function(data) {
@@ -251,6 +271,12 @@ function selectBiddingId(x) {
 	var row = x.parentNode.parentNode.rowIndex;
 	var biddingId = document.getElementById("biddingTable").rows[row].cells[0].innerHTML;	
 	$("a").attr("href", "/bidding/"+biddingId);
+}
+
+function selectBidData(x) {
+	var datarow = x.parentNode.parentNode.rowIndex;
+	var bidDataId = document.getElementById("userBidDataTable").rows[datarow].cells[0].innerHTML;	
+	$("a").attr("href", "/bidding/"+bidDataId);
 }
 
 function toDateTime(date) {

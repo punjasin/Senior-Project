@@ -17,7 +17,7 @@
 			style="max-width: 250px;">
 	</p>
 	<p>Seat Quota : {{bidding.seat_quota}}</p>
-	
+
 
 	<h3 style="text-align: center;">Bid Ranking</h3>
 	<table class="table table-striped" id="bidDataTable">
@@ -56,6 +56,10 @@
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
 	data-target="#myModal" ng-show="isUser()">Place/Update Bid</button>
 
+<button type="button" class="btn btn-info btn-lg" ng-show="isUser()" ng-click="cancelBid()">Cancel
+	Bid</button>
+
+
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
@@ -70,7 +74,7 @@
 				<div class="alert alert-danger" ng-show="error">{{ error_msg
 					}}</div>
 				<div class="container" ng-init="getUserBidData()">
-				<p>Your current bid : {{userBidData.token}} token(s)</p>
+					<p>Your current bid : {{userBidData.token}} token(s)</p>
 					<form role="form" ng-submit="placeBid()">
 
 						<div class="form-group">

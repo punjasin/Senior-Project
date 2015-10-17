@@ -26,6 +26,11 @@ public interface BidDataRepository extends JpaRepository<BidData, Long>{
 	@Modifying
 	@Query("update BidData bd set bd.token = :token where bd.bidding_id = :bId AND bd.student_id = :sId")
 	void updateBidData(@Param("bId")Long bId,@Param("sId")int sId,@Param("token")int token);
-
 	
+	@Query("select bd from BidData bd where bd.student_id = :student_id")
+	Collection<BidData> getUserBidDataList(@Param("student_id")int student_id);
+	
+	@Modifying
+	@Query("delete from BidData bd where bd.bidding_id= :bidding_id AND bd.student_id = :student_id")
+	void deleteBidData(@Param("student_id")int student_id, @Param("bidding_id")Long bidding_id);
 }

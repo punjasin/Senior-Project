@@ -26,10 +26,7 @@ import tabs.service.bidding.BidDataService;
 public class BidDataController {
 	@Autowired
 	BidDataService bidDataService;
-	
-	
-	
-	
+
 	@RequestMapping(value = "/getBidData", method = RequestMethod.GET)
 	public ResponseEntity<Collection<BidData>> getBidDataList(
 			@RequestParam("bId") Long bId) {
@@ -38,15 +35,15 @@ public class BidDataController {
 		return new ResponseEntity<Collection<BidData>>(bidDataList,
 				HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/getUserBidData/{biddingID}/{student_id}")
-	public ResponseEntity<BidData> getUserBidData(@PathVariable("biddingID") Long biddingID,
-			@PathVariable("student_id") int student_id){
+	public ResponseEntity<BidData> getUserBidData(
+			@PathVariable("biddingID") Long biddingID,
+			@PathVariable("student_id") int student_id) {
 		BidData bidData = bidDataService.getUserBidData(biddingID, student_id);
-		return new ResponseEntity<BidData>(bidData,HttpStatus.OK);
+		return new ResponseEntity<BidData>(bidData, HttpStatus.OK);
 	}
-	
-	
+
 	@RequestMapping(value = "/placeBid", method = RequestMethod.POST)
 	public ResponseEntity<BidData> placeBid(@RequestBody BidData bidData,
 			HttpServletRequest request, HttpSession session,
@@ -56,8 +53,23 @@ public class BidDataController {
 		bidData.setBrowser(agent.getBrowser().toString() + "_"
 				+ agent.getBrowserVersion().toString());
 		bidData.setOs(agent.getOperatingSystem().toString());
-		bidData.setSid(session.getId());		
+		bidData.setSid(session.getId());
 		BidData savedBidData = bidDataService.saveBidData(bidData);
 		return new ResponseEntity<BidData>(savedBidData, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/getUserBidDataList/{student_id}",  method = RequestMethod.GET)
+	public ResponseEntity<Collection<BidData>> getUserBidDataList(
+			@PathVariable("student_id") int student_id) {
+		Collection<BidData> userBidDatalist = bidDataService
+				.getBidDataListByStudentId(student_id);
+		return new ResponseEntity<Collection<BidData>>(userBidDatalist,
+				HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/cancelBidData/{biddingID}/{student_id}", method = RequestMethod.DELETE)
+	public void cancelBid(@PathVariable("biddingID") Long biddingID,
+			@PathVariable("student_id") int student_id){
+		bidDataService.cancelBid(biddingID, student_id);
 	}
 }
