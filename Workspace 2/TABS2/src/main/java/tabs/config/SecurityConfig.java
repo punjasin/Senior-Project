@@ -24,27 +24,34 @@ import org.springframework.web.util.WebUtils;
 
 @Configuration
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-	
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
-    UserDetailsService userDetailsService;
-	
+	UserDetailsService userDetailsService;
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic().and().authorizeRequests()
-				.antMatchers("/", "/index.html", "/login", "/message", "/home", "/view/**" ,"/logout", "/register", "/getActivity", "/activity", "/activities", "/registerAcc", "/getProfile", "/activity/*", "/activityDetail", "/getBiddingList", "/bidding", "/getBidData").permitAll()
-				.antMatchers("/getUser/**", "/getAllUsers", "/deleteAct", "/createActivity", "/createActivityRest").hasAuthority("ADMIN")
-				.anyRequest()
-				.authenticated().and().csrf()
-				.csrfTokenRepository(csrfTokenRepository()).and()
+		http.httpBasic()
+				.and()
+				.authorizeRequests()
+				.antMatchers("/", "/index.html", "/login", "/message", "/home",
+						"/view/**", "/logout", "/register", "/getActivity",
+						"/activity", "/activities", "/registerAcc",
+						"/getProfile", "/activity/*", "/activityDetail",
+						"/getBiddingList", "/bidding", "/getBidData", "/getBidding")
+				.permitAll()
+				.antMatchers("/getUser/**", "/getAllUsers", "/deleteAct",
+						"/createActivity", "/createActivityRest",
+						"/getAvailableActivities", "/deleteAct")
+				.hasAuthority("ADMIN").anyRequest().authenticated().and()
+				.csrf().csrfTokenRepository(csrfTokenRepository()).and()
 				.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
 	}
-	
+
 	@Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-        .userDetailsService(userDetailsService);
-    }
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService);
+	}
 
 	private Filter csrfHeaderFilter() {
 		return new OncePerRequestFilter() {
@@ -52,8 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			protected void doFilterInternal(HttpServletRequest request,
 					HttpServletResponse response, FilterChain filterChain)
 					throws ServletException, IOException {
-				CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class
-						.getName());
+				CsrfToken csrf = (CsrfToken) request
+						.getAttribute(CsrfToken.class.getName());
 				if (csrf != null) {
 					Cookie cookie = WebUtils.getCookie(request, "XSRF-TOKEN");
 					String token = csrf.getToken();

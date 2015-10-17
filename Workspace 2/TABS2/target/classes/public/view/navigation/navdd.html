@@ -43,7 +43,7 @@
 				<ul class="nav navbar-nav navbar-right">
 									
 					<li ng-show="authenticated()" class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown">{{user.firstName+' '+user.lastName}} <span class="caret"></span></a>
+							data-toggle="dropdown">{{user.firstName+' '+user.lastName}} Token: {{user.token}}<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">								
 								<li><a href="" onclick="window.location.replace('/profile')">Profile</a></li>								
 								<li><a href="">Bidding List</a></li>															

@@ -92,5 +92,7 @@ public class BidData {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+	public Timestamp getUpdatedPlaceBidtime(){
+		return placeBidtime;
+	}
 }

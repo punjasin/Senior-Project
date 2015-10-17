@@ -108,7 +108,6 @@ public class UserServiceBean implements UserService {
 				i++;
 			}
 		}
-		System.out.println("OK");
 		userRepo.updateProfile(user.getEmail(), user.getFirstName(),
 				user.getLastName(), user.getMajor(), user.getFaculty(),
 				user.getId());

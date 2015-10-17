@@ -1,25 +1,102 @@
-<h1>Bidding : </h1>
+<h1>Bidding : {{bidding.title}}</h1>
 
 <div class="container col-md-10" ng-init="getBidData()">
+
+	<p>Activity: {{activity.activity_name}}</p>
+	<p>Description: {{bidding.description}}</p>
+
+	<p>
+		<b>Bidding round start time: </b><input class="form-control"
+			type="datetime-local" ng-model="bidding.startTimeInput" disabled
+			style="max-width: 250px;">
+	</p>
+
+	<p>
+		<b>Bidding round end time: </b><input class="form-control"
+			type="datetime-local" ng-model="bidding.endTimeInput" disabled
+			style="max-width: 250px;">
+	</p>
+	<p>Seat Quota : {{bidding.seat_quota}}</p>
+	
+
+	<h3 style="text-align: center;">Bid Ranking</h3>
 	<table class="table table-striped" id="bidDataTable">
 		<thead>
 			<tr>
 				<th class="col-sm-1">No.</th>
 				<th class="col-sm-3">Student ID</th>
 				<th class="col-sm-3">Name</th>
-				<th class="col-sm-3">Token</th>				
+				<th class="col-sm-3">Token</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="bidData in bidDataList | orderBy : 'token'" height="55">
+			<tr
+				ng-repeat="bidData in bidDataList | orderBy : '-token' | limitTo: bidding.seat_quota "
+				height="55">
 				<td hidden="true" id="activityID">{{ activity.id }}</td>
 				<td>{{ $index + 1 }}</td>
 				<td>{{ bidData.student_id }}</td>
 				<td>{{ bidData.firstName+' '+bidData.lastName }}</td>
-				<td>{{ bidData.token }}</td>				
+				<td>{{ bidData.token }}</td>
 			</tr>
 		</tbody>
 	</table>
-			
+
 </div>
-<div class="container"><a style="float: right;" class="btn btn-primary " ng-show="isAdmin()" href="/createActivity">Create New Activity</a></div>
+<div class="container">
+	<a style="float: right;" class="btn btn-primary " ng-show="isAdmin()"
+		href="" ng-click="updateBidding()">Update Bidding</a>
+</div>
+<div class="container">
+	<a style="float: right;" class="btn btn-primary " ng-show="isAdmin()"
+		ng-click="deleteBidding()" href="">Delete Bidding</a>
+</div>
+
+<!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+	data-target="#myModal" ng-show="isUser()">Place/Update Bid</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Place Bid</h4>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-danger" ng-show="error">{{ error_msg
+					}}</div>
+				<div class="container" ng-init="getUserBidData()">
+				<p>Your current bid : {{userBidData.token}} token(s)</p>
+					<form role="form" ng-submit="placeBid()">
+
+						<div class="form-group">
+							<label for="inputToken" class="control-label col-sm-1">Token
+								: </label>
+							<div class="col-sm-2">
+								<input type="number" class="form-control" id="inputToken"
+									required ng-model="bidding.tokenInput" min="1"
+									placeholder="Token">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-1">
+								<button type="submit" class="btn btn-primary btn-default">Submit</button>
+							</div>
+							<div class="col-sm-1">
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Cancel</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal-footer"></div>
+		</div>
+
+	</div>
+</div>

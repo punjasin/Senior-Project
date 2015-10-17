@@ -61,5 +61,11 @@ public class ActivityController {
 	public void deleteActivity(@RequestParam(value="id")Long id){	
 		activityService.delete(id); 
 	}
+	
+	@RequestMapping(value = "/getAvailableActivities", method = RequestMethod.GET)
+	public ResponseEntity<Collection<Activity>> getAvailableActivity(){
+		Collection<Activity> AvailableActivityList = activityService.getAvailableActivity();
+		return new ResponseEntity<Collection<Activity>>(AvailableActivityList, HttpStatus.OK);
+	}
 
 }

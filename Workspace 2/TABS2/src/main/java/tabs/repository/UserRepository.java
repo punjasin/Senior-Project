@@ -36,4 +36,11 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	@Query("select id from User")
 	List<Long> getIDList();
+	
+	@Modifying(clearAutomatically = true)
+	@Query("update User u set u.token = :token where u.student_id = :sId")
+	void updateToken(@Param("sId")int student_id, @Param("token")int token);
+	
+	@Query("select u from User u where u.student_id = :student_id")
+	User getUserByStudentID(@Param("student_id")int student_id);
 }

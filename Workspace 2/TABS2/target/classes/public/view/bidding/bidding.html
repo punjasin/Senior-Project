@@ -16,7 +16,7 @@
 				<td>{{ $index + 1 }}</td>
 				<td>{{ bidding.title }}</td>
 				<td>{{ bidding.description }}</td>
-				<td>{{ bidding.seat_qouta }}</td>
+				<td>{{ bidding.seat_quota }}</td>
 				<td>{{ bidding.status }}</td>
 				<td><a class="btn btn-primary btn-block" onclick="selectBiddingId(this)" >View detail</a></td>
 			</tr>
@@ -24,4 +24,4 @@
 	</table>
 			
 </div>
-<div class="container"><a style="float: right;" class="btn btn-primary "  href="/createBidding" ng-show="isAdmin()">Create New Activity</a></div>
+<div class="container"><a style="float: right;" class="btn btn-primary "  href="/createBidding" ng-show="isAdmin()">Create New Bidding</a></div>

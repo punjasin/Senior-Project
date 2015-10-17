@@ -33,7 +33,7 @@ create table Bidding (
 	bStart_time timestamp,
 	bEnd_time timestamp,
 	seat_quota int,
-	status varchar(10),
+	status varchar(50),
 	primary key (id)
 );
 
@@ -46,10 +46,10 @@ create table BidData (
 	lastName varchar(100),
 	token int,
 	placeBidTime timestamp,
-	status VARCHAR(10),
+	status VARCHAR(50),
 	session_id varchar(500),
 	ip_address varchar(50),
-	browser varchar(100),
+	browser varchar(500),
 	os varchar(100),
 	primary key (id)
 );

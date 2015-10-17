@@ -57,7 +57,7 @@ public class Bidding {
 	public void setbEnd_time(String bEnd_time) {
 		this.bEnd_time = Timestamp.valueOf(bEnd_time);
 	}
-	public int getSeat_qouta() {
+	public int getSeat_quota() {
 		return seat_quota;
 	}
 	public void setSeat_qouta(int seat_quota) {
@@ -69,6 +69,12 @@ public class Bidding {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public Timestamp getUpdateStartTime(){
+		return bStart_time;
+	}
 	
+	public Timestamp getUpdateEndTime(){
+		return bEnd_time;
+	}
 		
 }

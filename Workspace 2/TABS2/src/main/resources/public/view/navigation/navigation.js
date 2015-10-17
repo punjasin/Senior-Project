@@ -33,6 +33,6 @@ angular.module('navigation', ['ngRoute', 'auth']).controller(
 			$http.get('/getProfile?email=' + window.$userdata.email).success(
 					function(data) {
 						$scope.user = data;
-						window.$userdata = {role:data.role};
+						window.$userdata = data;
 					});
 		});

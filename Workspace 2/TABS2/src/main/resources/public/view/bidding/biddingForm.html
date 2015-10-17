@@ -1,0 +1,80 @@
+<h1>Biding Form</h1>
+
+<hr>
+<div class="alert alert-danger" ng-show="error">{{ error_msg }}</div>
+
+<div class="container" style="float: left;" ng-init="getBiddingDetail()">
+	<form role="form" ng-submit="formBidding()" class="form-horizontal">
+
+		<div class="form-group">
+			<label for="inputTitle" class="col-sm-3 control-label ">Title:
+			</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="inputName"
+					placeholder="Title" required ng-model="bidding.titleInput">
+			</div>
+		</div>
+
+
+		<div class="form-group">
+			<label for="inputPlace" class="col-sm-3 control-label">Activity:
+			</label>
+			<div class="col-sm-5">
+				 <select name="repeatSelect" id="repeatSelect" ng-model="availableActivityList" autofocus class="form-control" disabled="disabled">
+				 	<option value=""> --Please Select Activity-- </option>
+				 	<option ng-show="isUpdate" value="{{bidding.activity_id}}" selected="selected">{{activity.activity_name}}</option>
+					<option ng-repeat="activity in activities" value="{{activity.id}}">{{activity.activity_name}}</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="inputDescription" class="col-sm-3 control-label">Description:
+			</label>
+			<div class="col-sm-5">
+				<textarea ng-model="bidding.descriptionInput" type="textfield"
+					class="form-control" id="inputDescription"
+					placeholder="Description" required></textarea>
+			</div>
+		</div>
+
+
+
+		<div class="form-group">
+			<label for="inputStartTime" class="col-sm-3 control-label">Start
+				Time: </label>
+			<div class="col-sm-3">
+				<input type="datetime-local" class="form-control"
+					id="inputStartTime" required ng-model="bidding.startTimeInput">
+			</div>
+
+			<label for="inputStartTime" class="col-sm-2 control-label">End
+				Time: </label>
+			<div class="col-sm-3">
+				<input type="datetime-local" class="form-control" id="inputEndTime"
+					required ng-model="bidding.endTimeInput">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="inputSeat" class="col-sm-3 control-label">Seat
+				Quota: </label>
+			<div class="col-sm-2">
+				<input type="number" class="form-control" id="inputSeat" required
+					ng-model="bidding.seatQuotaInput" min="1" placeholder="Seat Quota">
+			</div>
+		</div>
+
+		<hr>
+		<div class="form-group">
+			<div class="col-sm-4">
+				<button type="submit" class="btn btn-primary btn-block">Submit</button>
+			</div>
+			<div class="col-sm-4">
+				<button type="reset" class="btn btn-primary btn-block"
+					ng-hide="isUpdate()">Reset</button>
+			</div>
+		</div>
+
+	</form>
+</div>

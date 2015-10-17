@@ -28,6 +28,12 @@ angular
 					}).when('/bidding/:biddingID', {
 						templateUrl : 'view/bidding/biddingDetail.html',
 						controller : 'bidding'
+					}).when('/createBidding', {
+						templateUrl : 'view/bidding/biddingForm.html',
+						controller : 'bidding'
+					}).when('/bidding/update/:biddingID', {
+						templateUrl : 'view/bidding/biddingForm.html',
+						controller : 'bidding'
 					}).when('/profile', {
 						templateUrl : 'view/profile/profile.html',
 						controller : 'profile'

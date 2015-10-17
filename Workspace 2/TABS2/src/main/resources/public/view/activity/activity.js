@@ -24,8 +24,8 @@ angular.module('activity', ['ngRoute', 'auth', 'navigation']).controller(
 					$scope.activity.endTimeInput = eDate;
 					$scope.activity.seatQuotaInput = $scope.activity.seat_quota;	
 					$scope.selectUpdate = true;
-				}).error(function(data) {
-					console.log("error")
+				}).error(function(data) {					
+					console.log("error/ creating new activity")
 				});													
 			}
 			$scope.isUpdate = function() {
@@ -42,18 +42,49 @@ angular.module('activity', ['ngRoute', 'auth', 'navigation']).controller(
 			    var startdate = new Date($('#inputStartTime').val());
 			    var enddate = new Date( $('#inputEndTime').val());
 			    $scope.st = toDateTime(startdate);
-			    $scope.et = toDateTime(enddate);			    
-			    			    
+			    $scope.et = toDateTime(enddate);
 			    
-			    if($scope.selectUpdate==true){		    	
-			    	$http({
-						url : '/updateActivityRest',
+			    if(startdate.getTime()>enddate.getTime()){
+			    	$scope.error = true;
+			    	$scope.error_msg = "Error: Invalid Start/End Date time!";			    	
+			    }else{
+			    	if($scope.selectUpdate==true){		    	
+				    	$http({
+							url : '/updateActivityRest',
+							method : "POST",
+							headers : {
+								'Content-Type' : 'application/json'
+							},
+							data : {
+								"id": $routeParams.activityID,
+								"activity_name" : $scope.activity.nameInput,
+								"description" : $scope.activity.descriptionInput,
+								"place" : $scope.activity.placeInput,
+								"start_time" : $scope.st,
+								"end_time" : $scope.et,
+								"seat_quota" : $scope.activity.seatQuotaInput
+							}
+						}).success(function(data, status, headers) {
+							$scope.error = false;
+							console.log("create successed");
+							$scope.selectUpdate = false;
+							window.location.replace("/activity");
+						}).error(function(data, status, headers) {
+							$scope.error = true;
+							if(status==500){
+								$scope.error_msg = "Error : Duplicate Activity";
+								console.log("Error : duplicate Activity");
+							}
+						});
+				    	
+				    } else {
+				    	$http({
+						url : '/createActivityRest',
 						method : "POST",
 						headers : {
 							'Content-Type' : 'application/json'
 						},
 						data : {
-							"id": $routeParams.activityID,
 							"activity_name" : $scope.activity.nameInput,
 							"description" : $scope.activity.descriptionInput,
 							"place" : $scope.activity.placeInput,
@@ -64,45 +95,17 @@ angular.module('activity', ['ngRoute', 'auth', 'navigation']).controller(
 					}).success(function(data, status, headers) {
 						$scope.error = false;
 						console.log("create successed");
-						$scope.selectUpdate = false;
 						window.location.replace("/activity");
 					}).error(function(data, status, headers) {
 						$scope.error = true;
 						if(status==500){
 							$scope.error_msg = "Error : Duplicate Activity";
 							console.log("Error : duplicate Activity");
-						}
-					});
-			    	
-			    } else {
-			    	$http({
-					url : '/createActivityRest',
-					method : "POST",
-					headers : {
-						'Content-Type' : 'application/json'
-					},
-					data : {
-						"activity_name" : $scope.activity.nameInput,
-						"description" : $scope.activity.descriptionInput,
-						"place" : $scope.activity.placeInput,
-						"start_time" : $scope.st,
-						"end_time" : $scope.et,
-						"seat_quota" : $scope.activity.seatQuotaInput
-					}
-				}).success(function(data, status, headers) {
-					$scope.error = false;
-					console.log("create successed");
-					window.location.replace("/activity");
-				}).error(function(data, status, headers) {
-					$scope.error = true;
-					if(status==500){
-						$scope.error_msg = "Error : Duplicate Activity";
-						console.log("Error : duplicate Activity");
-						}
-					});
-			    }
-			   
-			    }
+							}
+						});
+				    }
+			    }			    			    			    			   
+			}
 			
 			
 			$scope.isAdmin = function(){
@@ -142,7 +145,7 @@ function toDateTime(date) {
     month = month < 10 ? '0' + month : month;
     day = date.getUTCDate();
     day = day < 10 ? '0' + day : day;
-    hour = date.getUTCHours();
+    hour = date.getUTCHours()+7;
     hour = hour < 10 ? '0' + hour : hour;
     min = date.getUTCMinutes();
     min = min < 10 ? '0' + min : min;    
