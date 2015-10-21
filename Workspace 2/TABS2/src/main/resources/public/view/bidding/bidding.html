@@ -4,18 +4,16 @@
 		<thead>
 			<tr>
 				<th class="col-sm-1">No.</th>
-				<th class="col-sm-3">Title</th>
-				<th class="col-sm-3">Description</th>
+				<th class="col-sm-3">Title</th>				
 				<th class="col-sm-2">Seat Quota</th>
-				<th class="col-sm-1">Status</th>
+				<th class="col-sm-2">Status</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="bidding in biddingList | orderBy : 'id'" height="55">
 				<td hidden="true" id="biddingID">{{ bidding.id }}</td>
 				<td>{{ $index + 1 }}</td>
-				<td>{{ bidding.title }}</td>
-				<td>{{ bidding.description }}</td>
+				<td>{{ bidding.title }}</td>				
 				<td>{{ bidding.seat_quota }}</td>
 				<td>{{ bidding.status }}</td>
 				<td><a class="btn btn-primary btn-block" onclick="selectBiddingId(this)" >View detail</a></td>

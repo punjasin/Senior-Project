@@ -11,5 +11,6 @@ public interface BidDataService {
 	BidData saveBidData(BidData bidData);
 	BidData getUserBidData(Long biddingId,int student_id);
 	void cancelBid(Long biddingId,int student_id);
+	Collection<BidData> getWinBidDataList(Long bidding_id);
 	
 }

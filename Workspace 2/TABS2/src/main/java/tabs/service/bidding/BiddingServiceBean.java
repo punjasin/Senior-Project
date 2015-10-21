@@ -60,25 +60,26 @@ public class BiddingServiceBean implements BiddingService {
 	@Override
 	public Bidding update(Bidding bidding) {
 		Bidding persistedBidding = biddingRepo.getOne(bidding.getId());
+		actService.setStatus(persistedBidding.getActivity_id(), false);
 		if (persistedBidding.getId() == null) {
 			return null;
-		}
-		biddingRepo.updateBidding(bidding.getTitle(), bidding.getActivity_id(),
-				bidding.getDescription(), bidding.getUpdateStartTime(),
-				bidding.getUpdateEndTime(), bidding.getSeat_quota(),
-				bidding.getId());
-		return bidding;
+		}else{
+			Bidding updated = biddingRepo.save(bidding);
+			actService.setStatus(bidding.getActivity_id(), true);
+			return updated;
+		}		
 	}
 
 	@Override
-	public void deleteBidding(Long id, Long aId) {
-		actService.setStatus(aId, false);
+	public void deleteBidding(Long id, Long activity_id) {
+		actService.setStatus(activity_id, false);
 		biddingRepo.delete(id);
 	}
 
 	@Override
-	public void setBiddingStatus(String status) {
-		// TODO Auto-generated method stub
-
+	public void setBiddingStatus(Long id, String status) {
+		if(biddingRepo.getOne(id)!=null){
+			biddingRepo.changeBiddingStatus(id, status);
+		}
 	}
 }

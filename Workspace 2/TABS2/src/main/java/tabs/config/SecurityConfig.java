@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						"/view/**", "/logout", "/register", "/getActivity",
 						"/activity", "/activities", "/registerAcc",
 						"/getProfile", "/activity/*", "/activityDetail",
-						"/getBiddingList", "/bidding", "/getBidData", "/getBidding")
+						"/getBiddingList", "/bidding", "/getBidData", "/getBidding", "/bidding/**")
 				.permitAll()
 				.antMatchers("/getUser/**", "/getAllUsers", "/deleteAct",
 						"/createActivity", "/createActivityRest",

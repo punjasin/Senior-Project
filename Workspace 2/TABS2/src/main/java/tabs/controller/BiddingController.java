@@ -45,7 +45,7 @@ public class BiddingController {
 	
 
 	@RequestMapping(value = "/updateBiddingRest")
-	public ResponseEntity<Bidding> editBidding(@RequestBody Bidding bidding) {
+	public ResponseEntity<Bidding> updateBidding(@RequestBody Bidding bidding) {
 		Bidding updatedBidding = biddingService.update(bidding);
 		return new ResponseEntity<Bidding>(updatedBidding, HttpStatus.OK);
 	}

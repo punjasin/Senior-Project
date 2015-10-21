@@ -20,7 +20,7 @@
 			<label for="inputPlace" class="col-sm-3 control-label">Activity:
 			</label>
 			<div class="col-sm-5">
-				 <select name="repeatSelect" id="repeatSelect" ng-model="availableActivityList" autofocus class="form-control" disabled="disabled">
+				 <select name="repeatSelect" id="repeatSelect" ng-model="availableActivityList" autofocus class="form-control" ng-disabled="selectUpdate">
 				 	<option value=""> --Please Select Activity-- </option>
 				 	<option ng-show="isUpdate" value="{{bidding.activity_id}}" selected="selected">{{activity.activity_name}}</option>
 					<option ng-repeat="activity in activities" value="{{activity.id}}">{{activity.activity_name}}</option>

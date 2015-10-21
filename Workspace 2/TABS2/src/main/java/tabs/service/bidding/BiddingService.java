@@ -10,6 +10,6 @@ public interface BiddingService {
 	public Collection<Bidding> getBiddingList();
 	public Bidding create(Bidding bidding);
 	public Bidding update(Bidding bidding);
-	public void setBiddingStatus(String status);
-	public void deleteBidding(Long id, Long aId);
+	public void setBiddingStatus(Long bidding_id, String status);
+	public void deleteBidding(Long id, Long activity_id);
 }

@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Entity
-public class BidData {
+public class BidData{
 	
 	@Id
 	@GeneratedValue

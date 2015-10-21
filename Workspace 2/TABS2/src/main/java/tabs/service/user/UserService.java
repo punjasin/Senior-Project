@@ -12,4 +12,5 @@ public interface UserService {
 	public User getUserById(Long id);
 	public User getUserByEmail(String email);
 	public Collection<User> getAllUsers();
+	public User getUserByStudentId(int student_id);
 }

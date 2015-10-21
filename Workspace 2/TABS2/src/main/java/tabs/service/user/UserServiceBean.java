@@ -164,4 +164,12 @@ public class UserServiceBean implements UserService {
 		Collection<User> user = userRepo.findAll();
 		return user;
 	}
+
+	@Override
+	public User getUserByStudentId(int student_id) {
+		User u = userRepo.getUserByStudentID(student_id);
+		return u;
+	}
+	
+	
 }

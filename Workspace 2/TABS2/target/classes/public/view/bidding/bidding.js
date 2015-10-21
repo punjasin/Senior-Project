@@ -19,11 +19,14 @@ angular.module('bidding', ['ngRoute', 'navigation']).controller(
 			}
 			
 			$scope.isUser = function(){
-				if(window.$userdata.role=="USER"){
+				if(window.$userdata.role=="USER" && $scope.bidding.statusInput=="In bidding round"){
 					return true;
 				}else{
 					return false;
 				}
+			}
+			$scope.printPDF = function(){				
+				window.location.replace("/bidding/downloadPDF/"+$routeParams.biddingID);
 			}
 			
 			$scope.placeBid = function(){
@@ -54,7 +57,7 @@ angular.module('bidding', ['ngRoute', 'navigation']).controller(
 							$scope.error = false;
 							console.log("create successed");
 							$scope.selectUpdate = false;
-							window.location.replace("/bidding");
+							window.location.replace("/bidding/"+$routeParams.biddingID);
 						}).error(function(data, status, headers) {						
 							$scope.error = true;						
 								$scope.error_msg = "Error :";
@@ -78,9 +81,9 @@ angular.module('bidding', ['ngRoute', 'navigation']).controller(
 							}
 						}).success(function(data, status, headers) {
 							$scope.error = false;
-							console.log("create successed");
+							console.log("place successed");
 							$scope.selectUpdate = false;
-							window.location.replace("/bidding");
+							window.location.replace("/bidding/"+$routeParams.biddingID);
 						}).error(function(data, status, headers) {						
 							$scope.error = true;						
 								$scope.error_msg = "Error :";
@@ -88,14 +91,10 @@ angular.module('bidding', ['ngRoute', 'navigation']).controller(
 						});
 					}					
 				}											
-			}
-								
-			
-			$scope.isUpdate = function(){
-				return $scope.selectUpdate;
-			}
+			}								
 			
 			$scope.formBidding = function(){
+				
 				if($scope.bidding.activityIdInput==""){
 					$scope.error = true;
 			    	$scope.error_msg = "Error: Please select the activity";
@@ -123,7 +122,8 @@ angular.module('bidding', ['ngRoute', 'navigation']).controller(
 									"description" : $scope.bidding.descriptionInput,								
 									"bStart_time" : $scope.st,
 									"bEnd_time" : $scope.et,
-									"seat_quota" : $scope.bidding.seatQuotaInput
+									"seat_quota" : $scope.bidding.seatQuotaInput,
+									"status" : "Close"
 								}
 							}).success(function(data, status, headers) {
 								$scope.error = false;
@@ -179,7 +179,8 @@ angular.module('bidding', ['ngRoute', 'navigation']).controller(
 				});
 			}
 			
-			$scope.updateBidding = function(){				
+			$scope.updateBidding = function(){
+				$scope.selectUpdate = true;
 				$("a").attr("href", "/bidding/update/"+$routeParams.biddingID);						
 			}
 			
@@ -192,13 +193,13 @@ angular.module('bidding', ['ngRoute', 'navigation']).controller(
 					var sDate = new Date($scope.bidding.bStart_time);
 					var eDate = new Date($scope.bidding.bEnd_time);
 										
-					$scope.bidding.title_input = $scope.bidding.title;
+					$scope.bidding.titleInput = $scope.bidding.title;
 					$scope.bidding.activityIdInput = $scope.bidding.activity_id;
 					$scope.bidding.descriptionInput = $scope.bidding.description;					
 					$scope.bidding.startTimeInput = sDate;
 					$scope.bidding.endTimeInput = eDate;
-					$scope.bidding.seatQuotaInput = $scope.bidding.seat_quota;					
-					$scope.selectUpdate = true;
+					$scope.bidding.seatQuotaInput = $scope.bidding.seat_quota;
+					$scope.bidding.statusInput = $scope.bidding.status;
 					$scope.getActivity($scope.bidding.activity_id);
 				}).error(function(data) {					
 					console.log("error/ creating new activity")
